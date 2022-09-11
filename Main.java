@@ -14,7 +14,7 @@ public class Main{
         int numberOfUnits = 0;
         double price = 0;
         double subtotal = 0;
-        //these variables hold information from the user and the value passed by computeOrder method. This information is then used to create a reciept
+        //these variables hold information from the user and the value passed by computeOrder method. This information is then used to create a receipt
         DecimalFormat round = new DecimalFormat("###,###,###.##");//used to round off the results from computeOrder
         
         Scanner scanner = new Scanner(System.in);
@@ -24,7 +24,7 @@ public class Main{
         System.out.println("how many Calanders would you like to order?\n");
         numberOfUnits = scanner.nextInt();
 
-        if(numberOfUnits == 0){//if the number of units is 0 the order total will be 0 the program will just skip to printing the reciept
+        if(numberOfUnits == 0){//if the number of units is 0 the order total will be 0 the program will just skip to printing the receipt
             subtotal = 0;
         }
         if(numberOfUnits == 1){//if the number of units is one then the program will check if the user has a discount code and varify that code. Then it will pass the price to the Compute order method and the discount if applicable
@@ -84,17 +84,17 @@ public class Main{
             }
         }
         
-        String reciept = "Calendar   Quantity    Price\n           ";
-        reciept += String.valueOf(numberOfUnits) + "            ";
-        reciept += "$" + String.valueOf(round.format(price)) + " \n\n";
-        reciept += "Tax: $" + String.valueOf(round.format(price * 0.065)) + "\n";
-        reciept += "Discount: $" + String.valueOf(round.format(((price + (price * 0.065))*numberOfUnits)-subtotal)) + "\n";
-        reciept += "Total: $" + String.valueOf(round.format(subtotal));
-        //this block of code takes the information from the previous if else block and uses it to create a reciept fot the user
-        //this block uses the += opporator to append onto the reciept string. It is doen this way as opposed to doing everything on one line in order to make it more readable
+        String receipt = "Calendar   Quantity    Price\n           ";
+        receipt += String.valueOf(numberOfUnits) + "            ";
+        receipt += "$" + String.valueOf(round.format(price)) + " \n\n";
+        receipt += "Tax: $" + String.valueOf(round.format(price * 0.065)) + "\n";
+        receipt += "Discount: $" + String.valueOf(round.format(((price + (price * 0.065))*numberOfUnits)-subtotal)) + "\n";
+        receipt += "Total: $" + String.valueOf(round.format(subtotal));
+        //this block of code takes the information from the previous if else block and uses it to create a receipt fot the user
+        //this block uses the += opporator to append onto the receipt string. It is doen this way as opposed to doing everything on one line in order to make it more readable
         
-        System.out.println(reciept);
-        //the program displays the reciept created by the previous code block
+        System.out.println(receipt);
+        //the program displays the receipt created by the previous code block
     }//end of main
     /*the three methods are used to compute the price of orders depending on the information available*/
 
