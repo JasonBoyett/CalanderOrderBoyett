@@ -4,20 +4,18 @@
  * Sept 10, 2022
  * macOS
  */
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
-import javax.swing.JOptionPane;
+import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class Main{
 
-    public static void main(String[] args){
+    public static void main(String[] args){//in main the program program prompts the user for key information and uses that information to determin which computeOrder method to use. that computeOrder method then has the relavent information passed to it.
         int numberOfUnits = 0;
         double price = 0;
         double subtotal = 0;
-        DecimalFormat round = new DecimalFormat("###,###,###.##");
+        //these variables hold information from the user and the value passed by computeOrder method. This information is then used to create a reciept
+        DecimalFormat round = new DecimalFormat("###,###,###.##");//used to round off the results from computeOrder
         
         Scanner scanner = new Scanner(System.in);
         String isDiscounted;
@@ -26,10 +24,10 @@ public class Main{
         System.out.println("how many Calanders would you like to order?\n");
         numberOfUnits = scanner.nextInt();
 
-        if(numberOfUnits == 0){
+        if(numberOfUnits == 0){//if the number of units is 0 the order total will be 0 the program will just skip to printing the reciept
             subtotal = 0;
         }
-        if(numberOfUnits == 1){
+        if(numberOfUnits == 1){//if the number of units is one then the program will check if the user has a discount code and varify that code. Then it will pass the price to the Compute order method and the discount if applicable
             System.out.println("Do you have a discount code? Yes/No \n");
             isDiscounted = scanner.next();
             isDiscounted = isDiscounted.toUpperCase();
@@ -57,7 +55,7 @@ public class Main{
                 subtotal = computeOrder(price);
             }
         }
-        else{
+        else{//if the number of units is greater than one then the method that takes an intiger number of units is used as opposed to the one that simply takes a price. This block performs the same checks and prompts the user in the same ways as the previous ones
             System.out.println("Do you have a discount code? Yes/No \n");
             isDiscounted = scanner.next();
             isDiscounted = isDiscounted.toUpperCase();
@@ -85,18 +83,20 @@ public class Main{
                 subtotal = computeOrder(price,numberOfUnits);
             }
         }
-    
+        
         String reciept = "Calendar   Quantity    Price\n           ";
         reciept += String.valueOf(numberOfUnits) + "            ";
         reciept += "$" + String.valueOf(round.format(price)) + " \n\n";
         reciept += "Tax: $" + String.valueOf(round.format(price * 0.065)) + "\n";
         reciept += "Discount: $" + String.valueOf(round.format(((price + (price * 0.065))*numberOfUnits)-subtotal)) + "\n";
         reciept += "Total: $" + String.valueOf(round.format(subtotal));
-        System.out.println(reciept);
+        //this block of code takes the information from the previous if else block and uses it to create a reciept fot the user
+        //this block uses the += opporator to append onto the reciept string. It is doen this way as opposed to doing everything on one line in order to make it more readable
         
-
-    }
-    /*the first three methods are used to compute the price of orders*/
+        System.out.println(reciept);
+        //the program displays the reciept created by the previous code block
+    }//end of main
+    /*the three methods are used to compute the price of orders depending on the information available*/
 
     public static double computeOrder(double price){
         return (price + (price * 0.065));
@@ -108,5 +108,5 @@ public class Main{
 
     public static double computeOrder(double price, int numberOfUnits, double discount){
         return (((price + (price * 0.065)) - ((price + (price * 0.065)) * discount)) * numberOfUnits);
-    }
+    }//computes the price of an order by taking in the price and adding tax and multiplying that by the number of units then subtracting the previous number times the discount
 }
